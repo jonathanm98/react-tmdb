@@ -1,0 +1,197 @@
+@use "../variables" as *;
+
+header {
+  height: 100px;
+  h1 {
+    font-family: $font1;
+    text-transform: uppercase;
+    font-size: 5vw;
+    font-weight: 600;
+    color: black;
+    position: absolute;
+    left: 50%;
+    top: 1%;
+    transform: translate(-50%, 0%);
+    display: block;
+    letter-spacing: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    &::after {
+      content: "react movies";
+      position: absolute;
+      color: transparent;
+      background-image: repeating-linear-gradient(
+        135deg,
+        transparent 0,
+        $c2 2px,
+        $c2 4px
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transition: 1s;
+      white-space: nowrap;
+    }
+
+    &::before {
+      content: "react movies";
+      position: absolute;
+      color: transparent;
+      background-image: repeating-linear-gradient(
+        135deg,
+        transparent 0,
+        $c2 2px,
+        $c2 4px
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      top: 0px;
+      left: 0px;
+      transition: 1s;
+      white-space: nowrap;
+    }
+
+    &:hover:after {
+      top: 6px;
+      left: 6px;
+    }
+
+    &:hover:before {
+      top: -6px;
+      left: -6px;
+    }
+    @media (pointer: coarse) {
+      -webkit-tap-highlight-color: transparent;
+      &:hover:after {
+        top: 0;
+        left: 0;
+      }
+
+      &:hover:before {
+        top: 0;
+        left: 0;
+      }
+    }
+    @media (max-width: 1500px) {
+      font-size: 6vw;
+    }
+    @media (max-width: 1500px) {
+      font-size: 7vw;
+    }
+    @media (max-width: 1000px) {
+      font-size: 10vw;
+      letter-spacing: 6px;
+    }
+    @media (max-width: 768px) {
+      font-size: 12vw;
+      letter-spacing: 5px;
+    }
+  }
+  button {
+    z-index: 1;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    svg {
+      width: 40px;
+      height: 40px;
+      margin: auto;
+      path {
+        stroke-width: 2.5;
+        transition: 0.5s;
+      }
+    }
+    @media (max-width: 800px) {
+      top: 15px;
+      left: 15px;
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+  nav {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: $c2;
+    color: $bgc;
+    height: 100%;
+    padding: 20px 5%;
+    width: 20vw;
+    opacity: 0;
+    ul {
+      margin-top: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      li {
+        font-size: 1vw;
+        margin-bottom: 20px;
+        border: 2px solid $c1;
+        border-radius: 10px;
+        &:first-child {
+          margin-bottom: 40px;
+        }
+        a {
+          display: flex;
+          flex-direction: row;
+          padding: 10px 20px;
+          svg {
+            margin-right: 10px;
+            height: 100px;
+          }
+        }
+      }
+    }
+    @media (max-width: 1400px) {
+      li {
+        p,
+        svg {
+          font-size: 2vw;
+        }
+      }
+    }
+    @media (max-width: 900px) {
+      width: 40vw;
+      li {
+        p,
+        svg {
+          font-size: 2.5vw;
+        }
+      }
+    }
+    @media (max-width: 768px) {
+      width: 100vw;
+      li {
+        p,
+        svg {
+          font-size: 4vw;
+        }
+        margin-bottom: 40px;
+      }
+    }
+    @media (max-width: 600px) {
+      width: 100vw;
+      li {
+        p,
+        svg {
+          font-size: 5vw;
+        }
+      }
+    }
+  }
+}

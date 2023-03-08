@@ -1,10 +1,14 @@
 import React from "react";
+import Header from "../components/Header";
 
 const Favourites = () => {
   return (
-    <div>
-      <h1>Favourites</h1>
-    </div>
+    <>
+      <Header />
+      <main>
+        <h2>Favoris</h2>
+      </main>
+    </>
   );
 };
 
