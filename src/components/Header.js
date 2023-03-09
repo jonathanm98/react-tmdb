@@ -3,15 +3,15 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const Header = () => {
-  const variants = {
+  const [isOpen, setIsOpen] = useState(false);
+  const menuVariants = {
     open: { opacity: 1, x: 0 },
     closed: { opacity: 0, x: "-100%" },
   };
-  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <header>
-      <motion.nav animate={isOpen ? "open" : "closed"} variants={variants}>
+      <motion.nav animate={isOpen ? "open" : "closed"} variants={menuVariants}>
         <ul>
           <motion.li>
             <Link to="/">
@@ -28,7 +28,12 @@ const Header = () => {
         </ul>
       </motion.nav>
       <Link to="/">
-        <h1 className="header-logo">REACT MOVIES</h1>
+        <motion.h1
+          animate={{ transform: "translate(-50%, 0%) scale(1)" }}
+          className="header-logo"
+        >
+          REACT MOVIES
+        </motion.h1>
       </Link>
       <button onClick={() => setIsOpen((isOpen) => !isOpen)}>
         <svg viewBox="0 0 23 23">

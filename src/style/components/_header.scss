@@ -11,7 +11,7 @@ header {
     position: absolute;
     left: 50%;
     top: 1%;
-    transform: translate(-50%, 0%);
+    transform: translate(-50%, 0%) scale(0.5);
     display: block;
     letter-spacing: 8px;
     cursor: pointer;
@@ -24,7 +24,7 @@ header {
     user-select: none;
 
     &::after {
-      content: "react movies";
+      content: "REACT MOVIES";
       position: absolute;
       color: transparent;
       background-image: repeating-linear-gradient(
@@ -38,12 +38,12 @@ header {
       top: 0;
       left: 0;
       z-index: -1;
-      transition: 1s;
+      transition: 0.4s ease-in-out;
       white-space: nowrap;
     }
 
     &::before {
-      content: "react movies";
+      content: "REACT MOVIES";
       position: absolute;
       color: transparent;
       background-image: repeating-linear-gradient(
@@ -56,18 +56,18 @@ header {
       -webkit-background-clip: text;
       top: 0px;
       left: 0px;
-      transition: 1s;
+      transition: 0.4s ease-in-out;
       white-space: nowrap;
     }
 
     &:hover:after {
-      top: 6px;
-      left: 6px;
+      top: 4px;
+      left: 4px;
     }
 
     &:hover:before {
-      top: -6px;
-      left: -6px;
+      top: -5px;
+      left: -5px;
     }
     @media (pointer: coarse) {
       -webkit-tap-highlight-color: transparent;
