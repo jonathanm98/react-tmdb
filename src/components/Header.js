@@ -15,13 +15,13 @@ const Header = () => {
         <ul>
           <motion.li>
             <Link to="/">
-              <i class="fa-solid fa-house"></i>
+              <i className="fa-solid fa-house"></i>
               <p>Accueil</p>
             </Link>
           </motion.li>
           <motion.li>
             <Link to="/favoris">
-              <i class="fa-solid fa-heart"></i>
+              <i className="fa-solid fa-heart"></i>
               <p>Favoris</p>
             </Link>
           </motion.li>
@@ -40,20 +40,20 @@ const Header = () => {
           <path
             fill="transparent"
             stroke={isOpen ? "#faebd7" : "#800020"}
-            stroke-linecap="round"
+            strokeLinecap="round"
             d={isOpen ? "M 3 16.5 L 17 2.5" : "M 2 2.5 L 20 2.5"}
           ></path>
           <path
             fill="transparent"
             stroke={isOpen ? "#faebd7" : "#800020"}
-            stroke-linecap="round"
+            strokeLinecap="round"
             d="M 2 9.423 L 20 9.423"
             opacity={isOpen ? "0" : "1"}
           ></path>
           <path
             fill="transparent"
             stroke={isOpen ? "#faebd7" : "#800020"}
-            stroke-linecap="round"
+            strokeLinecap="round"
             d={isOpen ? "M 3 2.5 L 17 16.346" : "M 2 16.346 L 20 16.346"}
           ></path>
         </svg>
