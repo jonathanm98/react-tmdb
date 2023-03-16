@@ -1,6 +1,5 @@
 import countries from "i18n-iso-countries";
-import React, { useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Movie = ({ movie, moviesGenres, setSelectedId, index }) => {
   const dateFormat = (date) => {
