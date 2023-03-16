@@ -7,3 +7,27 @@ $bgc: #faebd7;
 
 $font1: "Bebas Neue", cursive;
 $font2: "Lato", sans-serif;
+
+:export {
+  c1: #{$c1};
+  c2: #{$c2};
+  c3: #{$c3};
+  c4: #{$c4};
+  c5: #{$c5};
+  bgc: #{$bgc};
+}
+
+@keyframes float {
+  0% {
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+    transform: translatey(0px);
+  }
+  50% {
+    filter: drop-shadow(4px 8px 2px rgb(0 0 0 / 0.4));
+    transform: translatey(-3px);
+  }
+  100% {
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+    transform: translatey(0px);
+  }
+}

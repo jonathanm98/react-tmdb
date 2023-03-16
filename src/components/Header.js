@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const Header = () => {
@@ -14,27 +14,33 @@ const Header = () => {
       <motion.nav animate={isOpen ? "open" : "closed"} variants={menuVariants}>
         <ul>
           <motion.li>
-            <Link to="/">
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
               <i className="fa-solid fa-house"></i>
               <p>Accueil</p>
-            </Link>
+            </NavLink>
           </motion.li>
           <motion.li>
-            <Link to="/favoris">
+            <NavLink
+              to="/favoris"
+              className={({ isActive }) => (isActive ? "active" : "")}
+            >
               <i className="fa-solid fa-heart"></i>
               <p>Favoris</p>
-            </Link>
+            </NavLink>
           </motion.li>
         </ul>
       </motion.nav>
-      <Link to="/">
+      <NavLink to="/">
         <motion.h1
           animate={{ transform: "translate(-50%, 0%) scale(1)" }}
           className="header-logo"
         >
           REACT MOVIES
         </motion.h1>
-      </Link>
+      </NavLink>
       <button onClick={() => setIsOpen((isOpen) => !isOpen)}>
         <svg viewBox="0 0 23 23">
           <path

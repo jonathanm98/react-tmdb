@@ -127,7 +127,7 @@ header {
     position: absolute;
     top: 0;
     left: 0;
-    background-color: $c2;
+    background-color: $c1;
     color: $bgc;
     height: 100%;
     padding: 20px 5%;
@@ -141,8 +141,9 @@ header {
       li {
         font-size: 1vw;
         margin-bottom: 20px;
-        border: 2px solid $c1;
+        border: 2px solid $c2;
         border-radius: 10px;
+        transition: 0.16s;
         &:first-child {
           margin-bottom: 40px;
         }
@@ -150,10 +151,21 @@ header {
           display: flex;
           flex-direction: row;
           padding: 10px 20px;
+          border-radius: 8px;
           svg {
-            margin-right: 10px;
+            filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+            margin-right: 15px;
             height: 100px;
           }
+          &.active {
+            background-color: $c2;
+            svg {
+              animation: float 1s ease-in-out infinite;
+            }
+          }
+        }
+        &:hover {
+          transform: scale(1.08);
         }
       }
     }
