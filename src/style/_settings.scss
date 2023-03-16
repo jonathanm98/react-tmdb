@@ -107,6 +107,7 @@ input {
 }
 body {
   background-color: $bgc;
+  overflow-x: hidden;
 }
 *::selection {
   background-color: $c1;
