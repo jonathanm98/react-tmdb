@@ -1,6 +1,7 @@
 @use "../variables" as *;
 
 .movie-card {
+  z-index: 1;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -12,9 +13,8 @@
   border: 2px solid $c1;
   transition: all 0.3s ease-in-out;
   &:hover {
-    transform: scale(1.06) !important;
+    transform: scale(1.04) !important;
     cursor: pointer;
-    z-index: 2;
   }
   img {
     width: 100%;
@@ -61,6 +61,7 @@
         display: flex;
         justify-content: space-around;
         align-items: flex-end;
+        flex-wrap: wrap;
         font-size: 1.1em;
         li {
           padding: 3px 5px;
@@ -83,15 +84,15 @@
   }
   @media (max-width: 1200px) {
     width: 30vw;
-    height: 60vw;
+    height: 70vw;
   }
   @media (max-width: 900px) {
     width: 40vw;
-    height: 80vw;
+    height: 88vw;
   }
   @media (max-width: 768px) {
-    width: 60vw;
-    height: 100vw;
+    width: 80vw;
+    height: 70vh;
     margin: 2vw 0 2vw 0;
   }
 }
