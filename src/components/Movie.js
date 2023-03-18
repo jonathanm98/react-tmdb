@@ -33,16 +33,16 @@ const Movie = ({ movie, moviesGenres, setSelectedId, index }) => {
         <div className="movie-infos">
           <div className="origin">
             <p>
-              Sortie :<bold> {dateFormat(movie.release_date)}</bold>
+              Sortie :<span> {dateFormat(movie.release_date)}</span>
             </p>
             <p>
               {movie.original_language === "en"
-                ? "Etats Unis"
+                ? "États-Unis"
                 : countries.getName(movie.original_language, "fr")}
             </p>
           </div>
           <div className="genre">
-            <p>Catégories :</p>
+            <h4>Catégories :</h4>
             <ul>
               {movie.genre_ids.map((genre, index) => {
                 return (

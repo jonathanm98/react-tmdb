@@ -53,11 +53,13 @@ const Home = () => {
 
   return (
     <>
-      <ActiveMovieCard
-        activeMovie={activeMovie}
-        selectedId={selectedId}
-        setSelectedId={setSelectedId}
-      />
+      {selectedId && (
+        <ActiveMovieCard
+          activeMovie={activeMovie}
+          selectedId={selectedId}
+          setSelectedId={setSelectedId}
+        />
+      )}
       <Header />
       <main>
         <h2>Films populaires en ce moment :</h2>
