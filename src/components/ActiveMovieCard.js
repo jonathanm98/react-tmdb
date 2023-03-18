@@ -1,15 +1,52 @@
 import React, { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import axios from "axios";
 import variables from "../style/_variables.scss";
 
 const ActiveMovieCard = ({ activeMovie, selectedId, setSelectedId }) => {
   const [distFromTop, setDistFromTop] = useState(0);
+  const controls = useAnimation();
+  const percentage = (activeMovie.vote_average * 100) / 10;
+  const [animatedPercentage, setAnimatedPercentage] = useState(0);
 
   window.addEventListener("scroll", () => {
     const { scrollTop } = document.documentElement;
     setDistFromTop(scrollTop);
   });
+
+  useEffect(() => {
+    let start = 0;
+    const duration = 1000;
+    const stepTime = 20;
+    const numberOfSteps = duration / stepTime;
+    const increment = (percentage - start) / numberOfSteps;
+
+    const animateNumber = () => {
+      if (start < percentage) {
+        start += increment;
+        setAnimatedPercentage(Math.round(start));
+        setTimeout(animateNumber, stepTime);
+      } else {
+        setAnimatedPercentage(Math.round(percentage));
+      }
+    };
+
+    setTimeout(() => {
+      animateNumber();
+    }, 400);
+  }, [percentage]);
+
+  useEffect(() => {
+    if (selectedId) {
+      controls.start("visible");
+    } else {
+      controls.start("hidden").then(() => {
+        setSelectedId(null);
+      });
+    }
+    // eslint-disable-next-line
+  }, [selectedId, controls]);
+
   const [relatedMovies, setRelatedMovies] = useState([]);
 
   useEffect(() => {
@@ -23,33 +60,48 @@ const ActiveMovieCard = ({ activeMovie, selectedId, setSelectedId }) => {
       });
   }, [selectedId]);
 
+  const variants = {
+    origin: { x: "-100%" },
+    visible: { x: "0%" },
+    hidden: { x: "120%" },
+  };
+
   return (
-    <AnimatePresence>
+    <>
       {selectedId && (
         <motion.div
           className="active-card-container"
           style={{ top: `${distFromTop}px` }}
-          initial={{ x: "-100%" }}
-          animate={{ x: "0%" }}
-          exit={{ x: "120%" }}
+          initial="origin"
+          animate={controls}
+          exit="hidden"
+          variants={variants}
           transition={{
-            type: "spring",
-            duration: 0.75,
-            easeInOut: "linear",
+            type: "tween",
+            duration: 0.5,
+            easeInOut: "easeInOut",
           }}
-          onClick={() => setSelectedId(null)}
+          onClick={() => {
+            controls.start("hidden").then(() => {
+              setSelectedId(null);
+            });
+          }}
         >
           <div className="active-card" onClick={(e) => e.stopPropagation()}>
             <div className="img-container">
-              <button onClick={() => setSelectedId(null)}>
+              <button
+                onClick={() => {
+                  controls.start("hidden").then(() => {
+                    setSelectedId(null);
+                  });
+                }}
+              >
                 <i className="fa-solid fa-xmark"></i>
               </button>
               <div className="rating">
                 <div className="outer">
                   <div className="inner">
-                    <div id="number">
-                      {(activeMovie.vote_average * 100) / 10 + "%"}
-                    </div>
+                    <div id="number">{animatedPercentage + "%"}</div>
                   </div>
                 </div>
                 <svg
@@ -74,6 +126,7 @@ const ActiveMovieCard = ({ activeMovie, selectedId, setSelectedId }) => {
                     transition={{
                       duration: 1,
                       ease: "easeInOut",
+                      delay: 0.4,
                     }}
                     cx="60"
                     cy="60"
@@ -107,7 +160,7 @@ const ActiveMovieCard = ({ activeMovie, selectedId, setSelectedId }) => {
           </div>
         </motion.div>
       )}
-    </AnimatePresence>
+    </>
   );
 };
 
