@@ -1,5 +1,4 @@
 import axios from "axios";
-import { AnimatePresence } from "framer-motion";
 import React, { useState, useEffect } from "react";
 import ActiveMovieCard from "../components/ActiveMovieCard";
 import Header from "../components/Header";
