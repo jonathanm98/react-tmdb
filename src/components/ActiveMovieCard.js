@@ -150,7 +150,6 @@ const ActiveMovieCard = ({ activeMovie, selectedId, setSelectedId }) => {
                   <h3>Films similaires :</h3>
                   <ul>
                     {relatedMovies.slice(0, 10).map((movie, index) => {
-                      console.log(movie);
                       return <li key={movie.id + index}>{movie.title}</li>;
                     })}
                   </ul>
