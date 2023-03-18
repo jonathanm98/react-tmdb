@@ -29,11 +29,17 @@ const Movie = ({ movie, moviesGenres, setSelectedId, index }) => {
           src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
           alt={`Poster du film : ${movie.title}`}
         />
-        <h3>{movie.title}</h3>
+        <h3>{movie.title ? movie.title : movie.name}</h3>
         <div className="movie-infos">
           <div className="origin">
             <p>
-              Sortie :<span> {dateFormat(movie.release_date)}</span>
+              Sortie :
+              <span>
+                {" "}
+                {dateFormat(
+                  movie.release_date ? movie.release_date : movie.first_air_date
+                )}
+              </span>
             </p>
             <p>
               {movie.original_language === "en"
@@ -46,7 +52,7 @@ const Movie = ({ movie, moviesGenres, setSelectedId, index }) => {
             <ul>
               {movie.genre_ids.map((genre, index) => {
                 return (
-                  <li key={genre}>
+                  <li key={genre + index}>
                     {moviesGenres.map((genreName) => {
                       if (genre === genreName.id) return genreName.name;
                       else return null;
