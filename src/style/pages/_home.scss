@@ -1,6 +1,17 @@
 @use "../variables" as *;
 body {
   main {
+    input {
+      display: block;
+      margin: 0 auto;
+      width: 60%;
+      outline: none;
+      border: 2px solid $c2;
+      border-radius: 10px;
+      font-size: 2em;
+      height: 100px;
+      margin-top: 50px;
+    }
     position: relative;
     h2 {
       font-size: calc(1rem + 1.5vw);
