@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import axios from "axios";
 import variables from "../style/_variables.scss";
 
 const ActiveMovieCard = ({ activeMovie, selectedId, setSelectedId }) => {
@@ -9,63 +10,100 @@ const ActiveMovieCard = ({ activeMovie, selectedId, setSelectedId }) => {
     const { scrollTop } = document.documentElement;
     setDistFromTop(scrollTop);
   });
+  const [relatedMovies, setRelatedMovies] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get(
+        `${process.env.REACT_APP_API_URL}/movie/${selectedId}/similar?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR&page=1`
+      )
+      .then((res) => {
+        setRelatedMovies(res.data.results);
+        setDistFromTop(document.documentElement.scrollTop);
+      });
+  }, [selectedId]);
 
   return (
     <AnimatePresence>
       {selectedId && (
         <motion.div
-          style={{ top: distFromTop }}
           className="active-card-container"
+          style={{ top: `${distFromTop}px` }}
           initial={{ x: "-100%" }}
-          animate={{ x: "0" }}
-          exit={{ x: "110%" }}
+          animate={{ x: "0%" }}
+          exit={{ x: "120%" }}
           transition={{
             type: "spring",
             duration: 0.75,
-            easeInOut: "ease-in-out",
+            easeInOut: "linear",
           }}
+          onClick={() => setSelectedId(null)}
         >
-          <div className="active-card">
+          <div className="active-card" onClick={(e) => e.stopPropagation()}>
             <div className="img-container">
-              <button placeholder="close" onClick={() => setSelectedId(null)}>
-                <svg viewBox="0 0 23 23">
-                  <path
-                    fill="transparent"
-                    stroke={variables.c1}
-                    strokeLinecap="round"
-                    d="M 3 16.5 L 17 2.5"
-                  ></path>
-                  <path
-                    fill="transparent"
-                    stroke={variables.c1}
-                    strokeLinecap="round"
-                    d="M 3 2.5 L 17 16.346"
-                  ></path>
-                </svg>
+              <button onClick={() => setSelectedId(null)}>
+                <i className="fa-solid fa-xmark"></i>
               </button>
+              <div className="rating">
+                <div className="outer">
+                  <div className="inner">
+                    <div id="number">
+                      {(activeMovie.vote_average * 100) / 10 + "%"}
+                    </div>
+                  </div>
+                </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  version="1.1"
+                  width="120px"
+                  height="120px"
+                >
+                  <defs>
+                    <linearGradient id="Color">
+                      <stop offset="0%" stopColor={variables.c1} />
+                      <stop offset="100%" stopColor={variables.c4} />
+                    </linearGradient>
+                  </defs>
+                  <motion.circle
+                    className="circle-bg"
+                    initial={{ strokeDashoffset: 340 }}
+                    animate={{
+                      strokeDashoffset:
+                        340 - (340 * activeMovie.vote_average) / 10,
+                    }}
+                    transition={{
+                      duration: 1,
+                      ease: "easeInOut",
+                    }}
+                    cx="60"
+                    cy="60"
+                    r="53"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
               <img
                 src={`https://image.tmdb.org/t/p/original${activeMovie.backdrop_path}`}
                 alt={`Poster du film : ${activeMovie.title}`}
               />
               <div className="filter"></div>
             </div>
-            <h2>{activeMovie.title}</h2>
-            <p>
-              {" "}
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-              Architecto ad adipisci asperiores nulla consequatur illum
-              similique eveniet deserunt libero dolore doloremque, expedita
-              corrupti eos ex a repellat quisquam distinctio est aspernatur, sit
-              aut sint, facilis aliquid veritatis. Repellendus deleniti
-              repudiandae reprehenderit quaerat necessitatibus, fugiat placeat
-              rem fuga ipsum rerum et fugit aspernatur asperiores laudantium
-              deserunt est, delectus nesciunt minus voluptatum corrupti. Earum
-              id expedita nam! Porro sequi totam provident rerum voluptatibus
-              commodi tempore libero quibusdam, culpa dolorum sapiente modi quia
-              assumenda voluptas nostrum quo nemo odit explicabo ad suscipit
-              tempora accusantium laborum? Sunt non odio impedit voluptates iure
-              modi iusto?
-            </p>
+
+            <div className="content-container">
+              <h2>{activeMovie.title}</h2>
+              <p>{activeMovie.overview}</p>
+              {relatedMovies.length > 0 && (
+                <div className="related-movies-container">
+                  <h3>Films similaires :</h3>
+                  <ul>
+                    {relatedMovies.slice(0, 10).map((movie, index) => {
+                      console.log(movie);
+                      return <li key={movie.id + index}>{movie.title}</li>;
+                    })}
+                  </ul>
+                </div>
+              )}
+            </div>
           </div>
         </motion.div>
       )}
