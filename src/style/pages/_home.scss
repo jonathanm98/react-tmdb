@@ -1,6 +1,7 @@
 @use "../variables" as *;
 body {
   main {
+    position: relative;
     input {
       display: block;
       margin: 0 auto;
@@ -8,11 +9,14 @@ body {
       outline: none;
       border: 2px solid $c2;
       border-radius: 10px;
-      font-size: 2em;
-      height: 100px;
+      font-size: calc(1em + 0.5vw);
+      height: 50px;
       margin-top: 50px;
+      @media (max-width: 768px) {
+        width: 80%;
+        height: 50px;
+      }
     }
-    position: relative;
     h2 {
       font-size: calc(1rem + 1.5vw);
       font-weight: 700;

@@ -97,7 +97,7 @@ const Home = () => {
       <main>
         <input
           type="text"
-          placeholder="Recherchez un film"
+          placeholder="Recherchez un film ou une série"
           onChange={handleInputChange}
         />
         <h2>
