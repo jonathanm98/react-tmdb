@@ -64,7 +64,6 @@ const ActiveMovieCard = ({
       .then((res) => {
         setRelatedMovies(res.data.results);
         setDistFromTop(document.documentElement.scrollTop);
-        console.log(res.data.results);
       });
   }, [selectedId]);
 
