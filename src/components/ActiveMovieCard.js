@@ -64,6 +64,7 @@ const ActiveMovieCard = ({
       .then((res) => {
         setRelatedMovies(res.data.results);
         setDistFromTop(document.documentElement.scrollTop);
+        console.log(res.data.results);
       });
   }, [selectedId]);
 
@@ -163,7 +164,21 @@ const ActiveMovieCard = ({
                   <h3>Films similaires :</h3>
                   <ul>
                     {relatedMovies.slice(0, 10).map((movie, index) => {
-                      return <li key={movie.id + index}>{movie.title}</li>;
+                      return (
+                        <li key={movie.id + index}>
+                          <div className="card-container">
+                            <img
+                              src={
+                                movie.poster_path
+                                  ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
+                                  : "./img/poster.jpg"
+                              }
+                              alt={"poster de film " + movie.title}
+                            />
+                            <h3>{movie.title}</h3>
+                          </div>
+                        </li>
+                      );
                     })}
                   </ul>
                 </div>

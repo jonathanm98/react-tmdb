@@ -65,6 +65,15 @@ video {
   color: inherit;
   text-decoration: none;
   font-family: $font2;
+  @media (pointer: coarse) {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
 }
 
 footer,
@@ -131,4 +140,16 @@ body {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+h2 {
+  font-size: calc(1em + 1.6vw);
+  font-weight: 700;
+}
+h3 {
+  font-size: calc(1em + 0.5vw);
+  font-weight: 600;
+}
+h4 {
+  font-size: calc(1em + 0.4vw);
+  font-weight: 500;
 }

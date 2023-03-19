@@ -53,22 +53,23 @@ const Movie = ({
         <div className="movie-infos">
           <div className="origin">
             <p>
-              Sortie :
+              Sortie :{" "}
               <span>
-                {" "}
                 {dateFormat(
                   movie.release_date ? movie.release_date : movie.first_air_date
                 )}
               </span>
             </p>
             <p>
+              Origine :{" "}
               {movie.original_language === "en"
                 ? "États-Unis"
+                : movie.original_language === "es"
+                ? "Espagne"
                 : countries.getName(movie.original_language, "fr")}
             </p>
           </div>
           <div className="genre">
-            <h4>Catégories :</h4>
             <ul>
               {movie.genre_ids?.map((genre, index) => {
                 return (
@@ -81,6 +82,9 @@ const Movie = ({
                 );
               })}
             </ul>
+          </div>
+          <div className="synopsis">
+            <p>{movie.overview}</p>
           </div>
         </div>
       </motion.div>
