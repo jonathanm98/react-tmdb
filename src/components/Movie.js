@@ -1,4 +1,3 @@
-import countries from "i18n-iso-countries";
 import { motion } from "framer-motion";
 import LikeButton from "./LikeButton";
 import { v4 as uuidv4 } from "uuid";
