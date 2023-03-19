@@ -2,8 +2,15 @@ import React, { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
 import axios from "axios";
 import variables from "../style/_variables.scss";
+import LikeButton from "./LikeButton";
 
-const ActiveMovieCard = ({ activeMovie, selectedId, setSelectedId }) => {
+const ActiveMovieCard = ({
+  activeMovie,
+  selectedId,
+  setSelectedId,
+  likedMovies,
+  setLikedMovies,
+}) => {
   const [distFromTop, setDistFromTop] = useState(0);
   const controls = useAnimation();
   const percentage = (activeMovie.vote_average * 100) / 10;
@@ -143,6 +150,12 @@ const ActiveMovieCard = ({ activeMovie, selectedId, setSelectedId }) => {
             </div>
 
             <div className="content-container">
+              <LikeButton
+                likedMovies={likedMovies}
+                setLikedMovies={setLikedMovies}
+                movie={activeMovie}
+                parentType="big-card"
+              />
               <h2>{activeMovie.title}</h2>
               <p>{activeMovie.overview}</p>
               {relatedMovies.length > 0 && (

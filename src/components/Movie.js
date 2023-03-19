@@ -1,7 +1,15 @@
 import countries from "i18n-iso-countries";
 import { motion } from "framer-motion";
+import LikeButton from "./LikeButton";
 
-const Movie = ({ movie, moviesGenres, setSelectedId, index }) => {
+const Movie = ({
+  movie,
+  moviesGenres,
+  setSelectedId,
+  index,
+  likedMovies,
+  setLikedMovies,
+}) => {
   const dateFormat = (date) => {
     const dateObj = new Date(date);
     const dateFormat = dateObj.toLocaleString("fr-FR", {
@@ -28,6 +36,12 @@ const Movie = ({ movie, moviesGenres, setSelectedId, index }) => {
         <img
           src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
           alt={`Poster du film : ${movie.title}`}
+        />
+        <LikeButton
+          likedMovies={likedMovies}
+          setLikedMovies={setLikedMovies}
+          movie={movie}
+          parentType="little-card"
         />
         <h3>{movie.title ? movie.title : movie.name}</h3>
         <div className="movie-infos">

@@ -13,6 +13,9 @@ const Home = () => {
   const [enptyInput, setEmptyInput] = useState(true);
   const [page, setPage] = useState(1);
   const [useEffectTrigger, setUseEffectTrigger] = useState(1);
+  const [likedMovies, setLikedMovies] = useState(
+    JSON.parse(localStorage.getItem("likedMovies")) || []
+  );
 
   useEffect(() => {
     async function getPopularMovies() {
@@ -107,6 +110,8 @@ const Home = () => {
           activeMovie={activeMovie}
           selectedId={selectedId}
           setSelectedId={setSelectedId}
+          likedMovies={likedMovies}
+          setLikedMovies={setLikedMovies}
         />
       )}
       <Header />
@@ -131,6 +136,8 @@ const Home = () => {
                 moviesGenres={moviesGenres}
                 selectedId={selectedId}
                 setSelectedId={setSelectedId}
+                likedMovies={likedMovies}
+                setLikedMovies={setLikedMovies}
               />
             );
           })}
