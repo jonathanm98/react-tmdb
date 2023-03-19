@@ -6,7 +6,6 @@ const Movie = ({
   movie,
   moviesGenres,
   setSelectedId,
-  index,
   likedMovies,
   setLikedMovies,
   setDataRefresh,
@@ -27,12 +26,8 @@ const Movie = ({
         id={movie.id}
         className="movie-card"
         onClick={() => setSelectedId(movie.id)}
-        initial={{ opacity: 0, y: 50 }}
-        animate={{
-          transition: { delay: index * 0.06 },
-          opacity: 1,
-          y: 0,
-        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
       >
         <img
           src={
