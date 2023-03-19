@@ -61,10 +61,7 @@ const Home = () => {
           .then((response) => {
             const data = response.data.results;
             const filteredData = data.filter(
-              (item) =>
-                item.media_type !== "person" &&
-                item.release_date !== "" &&
-                item.poster_path !== null
+              (item) => item.media_type !== "person" && item.release_date !== ""
             );
             console.log(filteredData);
             if (data.length > 0) {

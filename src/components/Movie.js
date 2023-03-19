@@ -35,7 +35,11 @@ const Movie = ({
         }}
       >
         <img
-          src={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+          src={
+            movie.poster_path
+              ? `https://image.tmdb.org/t/p/original${movie.poster_path}`
+              : "./img/poster.jpg"
+          }
           alt={`Poster du film : ${movie.title}`}
         />
         <LikeButton
