@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -18,7 +19,7 @@ const Header = () => {
               to="/"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
-              <i className="fa-solid fa-house"></i>
+              <FontAwesomeIcon icon="fa-solid fa-house" />
               <p>Accueil</p>
             </NavLink>
           </motion.li>
@@ -27,7 +28,7 @@ const Header = () => {
               to="/favoris"
               className={({ isActive }) => (isActive ? "active" : "")}
             >
-              <i className="fa-solid fa-heart"></i>
+              <FontAwesomeIcon icon="fa-solid fa-heart" />
               <p>Favoris</p>
             </NavLink>
           </motion.li>
