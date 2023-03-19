@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import ActiveMovieCard from "../components/ActiveMovieCard";
 import Header from "../components/Header";
 import Movie from "../components/Movie";
+import getGenresIds from "../utils/getGenresIds";
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
@@ -19,19 +20,7 @@ const Home = () => {
 
   useEffect(() => {
     async function getPopularMovies() {
-      await axios
-        .get(
-          `${process.env.REACT_APP_API_URL}/genre/movie/list?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR`
-        )
-        .then((response) => {
-          const data = response.data.genres;
-          data.push({ id: 10762, name: "Enfants" });
-          data.push({ id: 10765, name: "Sci-Fi & Fantasie" });
-          data.push({ id: 10759, name: "Action & Aventure" });
-          data.push({ id: 10768, name: "Guerre & Politique" });
-          setMoviesGenres(data);
-        });
-
+      setMoviesGenres(await getGenresIds(movies));
       await axios
         .get(
           `${process.env.REACT_APP_API_URL}/movie/popular?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR&page=1`
@@ -40,22 +29,9 @@ const Home = () => {
           const data = response.data.results;
           setMovies(data);
         });
-      getAllGenresById();
     }
 
-    function getAllGenresById() {
-      const genreIds = [];
-
-      movies.forEach((movie) => {
-        console.log(movie.genre_ids);
-        movie.genre_ids.forEAch((genreId) => {
-          if (!genreIds.includes(genreId)) genreIds.push(genreId);
-        });
-      });
-      console.log(genreIds);
-    }
-
-    getPopularMovies(1);
+    getPopularMovies();
     // eslint-disable-next-line
   }, [useEffectTrigger]);
 
@@ -134,7 +110,6 @@ const Home = () => {
                 movie={movie}
                 index={index}
                 moviesGenres={moviesGenres}
-                selectedId={selectedId}
                 setSelectedId={setSelectedId}
                 likedMovies={likedMovies}
                 setLikedMovies={setLikedMovies}

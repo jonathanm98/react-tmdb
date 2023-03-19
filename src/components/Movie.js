@@ -9,6 +9,7 @@ const Movie = ({
   index,
   likedMovies,
   setLikedMovies,
+  setDataRefresh,
 }) => {
   const dateFormat = (date) => {
     const dateObj = new Date(date);
@@ -42,6 +43,7 @@ const Movie = ({
           setLikedMovies={setLikedMovies}
           movie={movie}
           parentType="little-card"
+          setDataRefresh={setDataRefresh}
         />
         <h3>{movie.title ? movie.title : movie.name}</h3>
         <div className="movie-infos">
@@ -64,7 +66,7 @@ const Movie = ({
           <div className="genre">
             <h4>Catégories :</h4>
             <ul>
-              {movie.genre_ids.map((genre, index) => {
+              {movie.genre_ids?.map((genre, index) => {
                 return (
                   <li key={genre + index}>
                     {moviesGenres.map((genreName) => {
