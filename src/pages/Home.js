@@ -63,6 +63,7 @@ const Home = () => {
             const filteredData = data.filter(
               (item) => item.media_type !== "person" && item.release_date !== ""
             );
+            console.log(filteredData);
             if (data.length > 0) {
               !concatenableMovies && setMovies(filteredData);
               concatenableMovies && setMovies((movies) => [...movies, ...data]);
@@ -74,7 +75,7 @@ const Home = () => {
               setUseEffectTrigger(0);
             }
           });
-      }, 500)
+      }, 600)
     );
   };
 
