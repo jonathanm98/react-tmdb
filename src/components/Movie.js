@@ -1,6 +1,7 @@
 import countries from "i18n-iso-countries";
 import { motion } from "framer-motion";
 import LikeButton from "./LikeButton";
+import { v4 as uuidv4 } from "uuid";
 
 const Movie = ({
   movie,
@@ -10,6 +11,8 @@ const Movie = ({
   setLikedMovies,
   setDataRefresh,
 }) => {
+  const uniqueKey = uuidv4();
+
   const dateFormat = (date) => {
     const dateObj = new Date(date);
     const dateFormat = dateObj.toLocaleString("fr-FR", {
@@ -19,6 +22,12 @@ const Movie = ({
     const output = dateFormat;
     return output;
   };
+  function codeLangueVersNom(code) {
+    const langDisplayNames = new Intl.DisplayNames(["fr"], {
+      type: "language",
+    });
+    return langDisplayNames.of(code);
+  }
 
   return (
     <>
@@ -57,11 +66,16 @@ const Movie = ({
             </p>
             <p>
               Origine :{" "}
-              {movie.original_language === "en"
-                ? "États-Unis"
-                : movie.original_language === "es"
-                ? "Espagne"
-                : countries.getName(movie.original_language, "fr")}
+              {
+                // on utilise Intl.DisplayNames pour afficher le nom du pays en français
+                movie.original_language
+                  ? codeLangueVersNom(movie.original_language)
+                      // On met la première lettre en majuscule
+                      .charAt(0)
+                      .toUpperCase() +
+                    codeLangueVersNom(movie.original_language).slice(1)
+                  : "Inconnu"
+              }
             </p>
           </div>
           <div className="genre">
@@ -69,7 +83,7 @@ const Movie = ({
               {movie.genre_ids &&
                 movie.genre_ids.map((genre, index) => {
                   return (
-                    <li key={genre + index}>
+                    <li key={genre + uniqueKey}>
                       {moviesGenres.map((genreName) => {
                         if (genre === genreName.id) return genreName.name;
                         else return null;
@@ -79,7 +93,7 @@ const Movie = ({
                 })}
               {movie.genres &&
                 movie.genres.map((genre, index) => {
-                  return <li key={genre + index}>{genre.name}</li>;
+                  return <li key={genre + uniqueKey}>{genre.name}</li>;
                 })}
             </ul>
           </div>
