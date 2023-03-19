@@ -51,7 +51,7 @@ const Favorites = () => {
       )}
       <Header />
       <main>
-        <h2>Favoris</h2>
+        <h2>Vos films favoris : </h2>
         <div className="favorites-container">
           {favMovies[0] ? (
             favMovies.map((movie, index) => (
@@ -67,7 +67,7 @@ const Favorites = () => {
               />
             ))
           ) : (
-            <p>Vous n'avez pas encore de favoris</p>
+            <h2>Vous n'avez pas encore de favoris...</h2>
           )}
         </div>
       </main>

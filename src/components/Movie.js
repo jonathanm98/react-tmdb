@@ -66,16 +66,21 @@ const Movie = ({
           </div>
           <div className="genre">
             <ul>
-              {movie.genre_ids?.map((genre, index) => {
-                return (
-                  <li key={genre + index}>
-                    {moviesGenres.map((genreName) => {
-                      if (genre === genreName.id) return genreName.name;
-                      else return null;
-                    })}
-                  </li>
-                );
-              })}
+              {movie.genre_ids &&
+                movie.genre_ids.map((genre, index) => {
+                  return (
+                    <li key={genre + index}>
+                      {moviesGenres.map((genreName) => {
+                        if (genre === genreName.id) return genreName.name;
+                        else return null;
+                      })}
+                    </li>
+                  );
+                })}
+              {movie.genres &&
+                movie.genres.map((genre, index) => {
+                  return <li key={genre + index}>{genre.name}</li>;
+                })}
             </ul>
           </div>
           <div className="synopsis">
