@@ -9,28 +9,40 @@ const Favorites = () => {
   const [favMovies, setFavMovies] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [moviesGenres, setMoviesGenres] = useState([]);
-  const [likedMovies, setLikedMovies] = useState([]);
+  const [likedMovies, setLikedMovies] = useState(
+    JSON.parse(localStorage.getItem("likedMovies")) || []
+  );
   const [dataRefresh, setDataRefresh] = useState(false);
 
   useEffect(() => {
+    console.log("useEffect");
+
+    setLikedMovies(JSON.parse(localStorage.getItem("likedMovies")));
     async function getFavMovies() {
-      const likedMoviesFromLocalStorage =
-        JSON.parse(localStorage.getItem("likedMovies")) || [];
-      const movies = [];
-      likedMoviesFromLocalStorage.forEach((id) => {
+      const moviePromises = likedMovies.map((id) =>
         axios
           .get(
             `${process.env.REACT_APP_API_URL}/movie/${id}?api_key=${process.env.REACT_APP_API_KEY}&language=fr-FR`
           )
-          .then((response) => {
-            movies.push(response.data);
-          });
-      });
+          .then((response) => response.data)
+      );
+
+      const movies = await Promise.all(moviePromises);
       setFavMovies(movies);
-      setLikedMovies(likedMoviesFromLocalStorage);
       setMoviesGenres(await getGenresIds());
     }
     getFavMovies();
+    //eslint-disable-next-line
+  }, []);
+
+  useEffect(() => {
+    const likedMoviesFromLocalStorage =
+      JSON.parse(localStorage.getItem("likedMovies")) || [];
+    setFavMovies(
+      favMovies.filter((movie) =>
+        likedMoviesFromLocalStorage.includes(movie.id)
+      )
+    );
     setDataRefresh(false);
     //eslint-disable-next-line
   }, [dataRefresh]);
@@ -56,7 +68,7 @@ const Favorites = () => {
           {favMovies[0] ? (
             favMovies.map((movie, index) => (
               <Movie
-                key={movie.id + Math.floor(Math.random())}
+                key={movie.id}
                 movie={movie}
                 index={index}
                 moviesGenres={moviesGenres}

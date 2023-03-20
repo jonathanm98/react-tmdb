@@ -49,8 +49,8 @@ const Movie = ({
           likedMovies={likedMovies}
           setLikedMovies={setLikedMovies}
           movie={movie}
-          parentType="little-card"
           setDataRefresh={setDataRefresh}
+          parentType="little-card"
         />
         <h3>{movie.title ? movie.title : movie.name}</h3>
         <div className="movie-infos">
@@ -82,7 +82,7 @@ const Movie = ({
               {movie.genre_ids &&
                 movie.genre_ids.map((genre, index) => {
                   return (
-                    <li key={genre + uniqueKey}>
+                    <li key={uniqueKey + index}>
                       {moviesGenres.map((genreName) => {
                         if (genre === genreName.id) return genreName.name;
                         else return null;
@@ -92,7 +92,7 @@ const Movie = ({
                 })}
               {movie.genres &&
                 movie.genres.map((genre, index) => {
-                  return <li key={genre + uniqueKey}>{genre.name}</li>;
+                  return <li key={uniqueKey + index}>{genre.name}</li>;
                 })}
             </ul>
           </div>
